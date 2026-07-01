@@ -6,6 +6,36 @@ FPGA Model : Altera Cyclone IV E EP4CE115F29C7
 # Abstract
 Visible Light Communication (VLC) is a low-cost wireless communication method that can be implemented using light-emitting devices and camera-based receivers. However, implementing an actual VLC system requires stable interpretation of user input, precise timing control of the transmitted signal, and the detection and reconstruction of optical signals from the received image. In this design, we design and implement an FPGA-based encrypted VLC system based on Morse code and Caesar cipher encryption. The proposed system is configured to perform the main communication processing of the transmitter on the FPGA. The user’s push-button input undergoes synchronization and debouncing, after which it is classified into dots and dashes based on the input hold time. Subsequently, the Morse code decoder converts the completed code sequence into ASCII characters; the converted characters are displayed on the LCD for user verification and simultaneously stored in the transmit buffer. During the transmission process, Caesar cipher encryption using switch-based variable keys is applied to the uppercase message stored in the buffer, and the encrypted characters are converted back into Morse code patterns. Subsequently, an LED transmitter based on a finite state machine (FSM) precisely controls the dots, dashes, spaces between symbols, and spaces between characters to transmit the encrypted Morse light signal via a green LED. The receiver is built using Python and OpenCV and detects the green LED signal by analyzing the HSV color space in the camera feed. The detected optical signal is reconstructed into dots and dashes through temporal state verification and pulse duration analysis. The reconstructed Morse code is converted into ciphertext characters and then reconstructed into the plaintext message via Caesar decryption using the same key. By combining an FPGA-based transmitter—which handles input processing, character buffering, encryption, Morse code re-encoding, and precise timing control—with a Python-based image receiver, this system presents a design for an end-to-end encrypted visible light communication system that can be implemented in a low-cost environment.
 
+<img width="727" height="397" alt="image" src="https://github.com/user-attachments/assets/4e9909bf-6cb5-4551-9df3-1b311de9780d" />
+
+## System Demonstration
+
+<table>
+<tr>
+<td align="center"><b>Transmitter</b></td>
+<td align="center"><b>Receiver</b></td>
+</tr>
+
+<tr>
+<td align="center">
+<img src="https://github.com/user-attachments/assets/81423921-f21f-47ef-a295-4a3599a0b49c" width="450">
+</td>
+
+<td align="center">
+<img src="https://github.com/user-attachments/assets/07313c02-47df-4bf7-8185-1d36ae37882e" width="450">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+LED-based encrypted Morse code transmission
+</td>
+
+<td align="center">
+Optical signal reception and message decoding
+</td>
+</tr>
+</table>
 
 
 # FPGA Pin Assignments
